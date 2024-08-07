@@ -84,7 +84,7 @@ fn get_pid_by_name(pname: &str) -> Vec<u32> {
     let mut result = vec![];
     unsafe {
         for pp in tasklist::Tasklist::new() {
-            if pp.get_pname() == pname {
+            if pp.get_pname().trim_end_matches('\0') == pname {
                 result.push(pp.get_pid());
             }
         }
